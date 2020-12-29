@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:xlo_mobx/helpers/extensions.dart';
+import 'package:xlo_mobx/repositories/user_repository.dart';
 part 'login_store.g.dart';
 
 class LoginStore = _LoginStore with _$LoginStore;
@@ -31,11 +32,20 @@ abstract class _LoginStore with Store {
   @observable
   bool loading = false;
 
+  @observable
+  String error;
+
   @action
   Future<void> _login() async {
     loading = true;
 
-
+    try {
+      final user = await UserRepository().loginWithEmail(email, password);
+      error = null;
+    } catch (e) {
+      print(e);
+      error = e;
+    }
 
     loading = false;
   }
