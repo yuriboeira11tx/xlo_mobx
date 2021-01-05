@@ -3,12 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:xlo_mobx/components/custom_drawer/custom_drawer.dart';
 import 'package:xlo_mobx/screens/create/components/images_field.dart';
+import 'package:xlo_mobx/stores/create_store.dart';
 
 class CreateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final labelStyle = TextStyle(fontWeight: FontWeight.w800,color: Colors.grey, fontSize: 18,);
+    final labelStyle = TextStyle(
+      fontWeight: FontWeight.w800,
+      color: Colors.grey,
+      fontSize: 18,
+    );
     final contentPadding = EdgeInsets.fromLTRB(16, 10, 12, 10);
+    final CreateStore createStore = CreateStore();
 
     return Scaffold(
       appBar: AppBar(
@@ -25,8 +31,7 @@ class CreateScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ImagesField(),
-
+            ImagesField(createStore),
             TextFormField(
               decoration: InputDecoration(
                 labelText: "Título",
@@ -34,7 +39,6 @@ class CreateScreen extends StatelessWidget {
                 contentPadding: contentPadding,
               ),
             ),
-
             TextFormField(
               decoration: InputDecoration(
                 labelText: "Descrição",
@@ -43,7 +47,6 @@ class CreateScreen extends StatelessWidget {
               ),
               maxLines: null,
             ),
-
             TextFormField(
               decoration: InputDecoration(
                 labelText: "Preço",
