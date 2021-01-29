@@ -35,6 +35,8 @@ dependencies:
   brasil_fields:
   image_picker:
   image_cropper:
+  dio:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:
