@@ -7,13 +7,13 @@ class CEPStore = _CEPStoreBase with _$CEPStore;
 
 abstract class _CEPStoreBase with Store {
   _CEPStoreBase() {
-	autorun((_) {
-	  if (clearCep.length != 8) {
-		_reset();
-	  } else {
-		_searchCep();
-	  }
-	});
+    autorun((_) {
+      if (clearCep.length != 8) {
+        _reset();
+      } else {
+        _searchCep();
+      }
+    });
   }
 
   @observable
@@ -24,7 +24,6 @@ abstract class _CEPStoreBase with Store {
 
   @computed
   String get clearCep => cep.replaceAll(RegExp('[^0-9]'), '');
-
 
   @observable
   Address address;
@@ -37,22 +36,22 @@ abstract class _CEPStoreBase with Store {
 
   @action
   void _reset() {
-	address = null;
-	error = null;
+    address = null;
+    error = null;
   }
 
   @action
   Future<void> _searchCep() async {
-	loading = true;
+    loading = true;
 
-	try {
-	  address = await CepRepository().getAddressFromApi(clearCep);
-	  error = null;
-	} catch (e) {
-	  error = e;
-	  address = null;
-	}
+    try {
+      address = await CepRepository().getAddressFromApi(clearCep);
+      error = null;
+    } catch (e) {
+      error = e;
+      address = null;
+    }
 
-	loading = false;
+    loading = false;
   }
 }

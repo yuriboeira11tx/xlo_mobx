@@ -10,6 +10,7 @@ class CEPField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextFormField(
           onChanged: cepStore.setCep,
@@ -34,11 +35,15 @@ class CEPField extends StatelessWidget {
               !cepStore.loading) {
             return Container();
           } else if (cepStore.address == null && cepStore.error == null) {
-            return LinearProgressIndicator();
+            return LinearProgressIndicator(
+              valueColor: AlwaysStoppedAnimation(Colors.purple),
+              backgroundColor: Colors.transparent,
+            );
           } else if (cepStore.error != null) {
             return Container(
               color: Colors.red.withAlpha(100),
               height: 50,
+              alignment: Alignment.center,
               padding: EdgeInsets.all(8),
               child: Text(
                 cepStore.error,
@@ -50,17 +55,19 @@ class CEPField extends StatelessWidget {
             );
           } else {
             final a = cepStore.address;
-            
+
             return Container(
               color: Colors.red.withAlpha(150),
               height: 50,
               padding: EdgeInsets.all(8),
+              alignment: Alignment.center,
               child: Text(
                 'Localização: ${a.district}, ${a.city.name} - ${a.uf.initials}',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
                 ),
+                textAlign: TextAlign.center,
               ),
             );
           }
